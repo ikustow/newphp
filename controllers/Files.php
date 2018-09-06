@@ -5,7 +5,7 @@ require_once 'databaseFunc.php';
 
 class Files extends File
 {
-public function loadavatar(){
+public function loadAvatar(){
     $avatar = new File;
     $pictureData = $avatar->loadProfilePicture($_FILES);
     loadInfoInUserDataBase($pictureData,$_POST);
@@ -21,13 +21,13 @@ public function loadavatar(){
         $view->render('infopage.html',$data=array());
     }
 }
-    public function loadpicture(){
+    public function loadPicture(){
         $picture = new File;
         $pictureData = $picture->loadContentPicture($_FILES);
         loadInfoInFilesDataBase($pictureData,$_POST);
         $user = User::findUserbyID($_POST['userid']);
         $pictures = File::findUserPictures($user[0]['id']);
-
+        openAdminPanel();
         if (!empty($user[0])) {
             $view = new \View();
             $view->render('userpage.html', ['user' => $user[0], 'pictures' => $pictures]);

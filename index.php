@@ -20,6 +20,9 @@ if ($routes[count($routes)-2] == "Users") {
 } elseif ( $routes[count($routes)-2] == "Files") {
     $controller_name = $routes[count($routes)-2];
     $action_name = $routes[count($routes)-1];
+}elseif ( $routes[count($routes)-2] == "Admin") {
+    $controller_name = $routes[count($routes)-2];
+    $action_name = $routes[count($routes)-1];
 }
 else {
     $controller_name ="Main";

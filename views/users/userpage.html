@@ -1,6 +1,6 @@
 
 <h1>Добро пожаловать, {{user.name}}!</h1>
-<form  enctype="multipart/form-data"  action="Files/loadavatar" method="post">
+<form  enctype="multipart/form-data"  action="Files/loadAvatar" method="post">
     <img src='/images/{{user.avatar}}' alt="{{user.avatar}}" style= "height: 100px; width: auto;"/>
     <br><br>
     <label>
@@ -26,7 +26,7 @@
     <br><br>
     <input type="hidden" name="userid" value="{{user.id}}" />
     </form>
-<form enctype="multipart/form-data" action="Files/loadpicture" method="post">
+<form enctype="multipart/form-data" action="Files/loadPicture" method="post">
     </label>
         <input name="picture" type="file"  accept="image/jpeg,image/png"/>
         <input type="submit" value="Загрузить картинку">

@@ -1,5 +1,5 @@
 <?php
-
+require_once  $_SERVER["DOCUMENT_ROOT"]."/vendor/autoload.php";
 class User extends \Illuminate\Database\Eloquent\Model
 {
     public $timestamps = false;

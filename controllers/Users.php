@@ -1,6 +1,7 @@
 <?php
 require_once  $_SERVER["DOCUMENT_ROOT"]."/models/User.php";
 require_once  $_SERVER["DOCUMENT_ROOT"]."/models/File.php";
+require_once 'databaseFunc.php';
 
 class Users extends User
 {
@@ -37,15 +38,20 @@ class Users extends User
     {
         $login = $_POST['login'];
         $password = $_POST['password'];
-        $user = User::findCurrentUser($login, $password);
-        $pictures = File::findUserPictures($user[0]['id']);
-
-        if (!empty($user[0])) {
-            $view = new \View();
-            $view->render('userpage.html', ['user' => $user[0], 'pictures' => $pictures]);
+        if ($login=="admin"&&$password=="admin"){
+            openAdminPanel();
         } else {
-            $view = new \View();
-            $view->render('infopage.html',$data=array());
+            $user = User::findCurrentUser($login, $password);
+            $pictures = File::findUserPictures($user[0]['id']);
+
+            if (!empty($user[0])) {
+                $view = new \View();
+                $view->render('userpage.html', ['user' => $user[0], 'pictures' => $pictures]);
+            } else {
+                $view = new \View();
+                $view->render('infopage.html',$data=array());
+            }
         }
-    }
+        }
+
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AdminPanel</title>
+</head>
+<body>
+<form action="Admin/getFiles" method="post">
+    <label>
+    ID пользователя  <input type="text" name="userid">
+    </label>
+    <br>
+    <label>
+        <input type="submit" value="Показать список загруженных файлов">
+    </label>
+    <p>Файлы:</p>
+    <ul>
+        {% for info in data %}
+        <li> ID: {{info.user}} ; File {{info.file}}; Path: {{info.filepath}} ;</li>
+        {% endfor %}
+    </ul>
+    </form>
+<form action="Admin/getUsers" method="post">
+    <br><br>
+    <label>
+        <input type="submit" value="Показать список пользователей">
+    </label>
+</form>
+<form action="Admin/sortbyASC" method="post">
+ <input type="submit" value="Сортировка по возрастанию">
+</form>
+<form action="Admin/sortbyDesc" method="post">
+    <input type="submit" value="Сортировка поубыванию">
+    <p>Пользователи:</p>
+    <ul>
+        {% for user in users %}
+        <li> ID: {{user.id}} ; Email {{user.login}}; Name: {{user.name}} ; age {{user.age}} ;</li>
+        {% endfor %}
+    </ul>
+</form>
+</body>
+</html>

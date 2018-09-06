@@ -17,3 +17,8 @@ function loadInfoInFilesDataBase($picInfo, $userInfo){
     $user->file = $picInfo['name'];
     $user->save();
 }
+
+function openAdminPanel(){
+    $view = new \View();
+    $view->render('admin.html', $data = array());
+}
