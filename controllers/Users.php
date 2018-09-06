@@ -1,5 +1,5 @@
 <?php
-require_once "C:\OSPanel\domains\mvc\models\User.php";
+require_once  $_SERVER["DOCUMENT_ROOT"]."/models/User.php";
 
 class Users extends User
 {
@@ -11,8 +11,7 @@ class Users extends User
         $password = $_POST['password'];
         $age = $_POST['age'];
         $info = $_POST['info'];
-        $avatar = $_POST['avatar'];
-        print_r($_POST);
+
 
         $user = new User();
         $user->name = $name;
@@ -20,12 +19,11 @@ class Users extends User
         $user->password = $password;
         $user->age = $age;
         $user->info = $info;
-        $user->avatar = $avatar;
+
         $user->save();
-        $user = json_decode($user);
-        print_r($user);
+        $user = User::findCurrentUser($login, $password);
         $view = new \View();
-        $view->render('userpage.html', [ 'user' => $_POST ]);
+        $view->render('userpage.html', [ 'user' => $user[0] ]);
     }
 
     public function reg()
@@ -39,10 +37,10 @@ class Users extends User
         $login = $_POST['login'];
         $password = $_POST['password'];
         $user = User::findCurrentUser($login, $password);
-        print_r(json_decode($user));
-        if (!empty($user)) {
+        if (!empty($user[0])) {
             $view = new \View();
-            $view->render('userpage.html', json_decode($user));
+            $view->render('userpage.html', ['user' => $user[0]]);
+       print_r($user[0]);
         } else {
             $view = new \View();
             $view->render('infopage.html',$data=array());

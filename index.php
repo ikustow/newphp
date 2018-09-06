@@ -9,7 +9,7 @@ require_once "controllers/Main.php";
 
 
 $routes = explode('/', $_SERVER['REQUEST_URI']);
-print_r($routes);
+
 
 $controller_name = "Main"; //
 $action_name = 'index';
@@ -17,7 +17,11 @@ $action_name = 'index';
 if ($routes[count($routes)-2] == "Users") {
     $controller_name = $routes[count($routes)-2];
     $action_name = $routes[count($routes)-1];
-} else {
+} elseif ( $routes[count($routes)-2] == "Files") {
+    $controller_name = $routes[count($routes)-2];
+    $action_name = $routes[count($routes)-1];
+}
+else {
     $controller_name ="Main";
     $action_name = 'index';
 }

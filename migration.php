@@ -13,6 +13,7 @@ Capsule::schema()->create('users', function (Blueprint $table) {
     $table->string('password');
     $table->integer('age');
     $table->string('avatar');
+    $table->string('avatarURL');
     $table->string('info');
 });
 //=========================
@@ -23,6 +24,6 @@ Capsule::schema()->create('files', function (Blueprint $table) {
     $table->string('userid');
     $table->string('file');
     $table->string('filepath');
-    $table->string('info');
+
 });
 

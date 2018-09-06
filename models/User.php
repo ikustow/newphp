@@ -12,6 +12,6 @@ class User extends \Illuminate\Database\Eloquent\Model
 
     public function findCurrentUser($username, $password)
     {
-        return User::newQuery()->Where("login", '=', $username)->Where('password', '=', $password)->get();
+        return  User::newQuery()->Where("login", '=', $username)->Where('password', '=', $password)->get()->toArray();
     }
 }

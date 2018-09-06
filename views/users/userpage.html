@@ -1,11 +1,18 @@
 
-<h1>Добро пожаловать {{user.name}}</h1>
-<form>
+<h1>Добро пожаловать, {{user.name}}!</h1>
+<form  enctype="multipart/form-data"  action="Files/loadavatar" method="post">
+    <img src='/images/{{user.avatar}}' alt="{{user.avatar}}" style= "height: 250px; width: auto;"/>
+    <br><br>
     <label>
-        Email  <input type="text" name="login" value={{user.login}}>
+        <input name="avatar" type="file"  accept="image/jpeg,image/png"/>
     </label>
     <br><br>
-   <label>
+    <label>
+        <input type="submit" value="Сменить аватарку">
+    </label>
+    <br><br>
+    <p>Информация:</p>
+    <label>
         Имя  <input type="text" name="name" value={{user.name}}>
     </label>
     <br><br>
@@ -17,12 +24,9 @@
         О себе  <input type="text" name="info" value={{user.info}}>
     </label>
     <br><br>
-    <label>
-        Аватар  <input type="text" name="avatar" value={{user.avatar}}>
-    </label>
-    <br><br>
-   </form>
-<form action="/users/loadpicture" method="post">
+    <input type="hidden" name="userid" value="{{user.id}}" />
+    </form>
+<form action="Files/loadpicture" method="post">
     </label>
         <input type="submit" value="Загрузить картинку">
     </label>

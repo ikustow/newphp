@@ -3,6 +3,7 @@
         "illuminate/database": "^5.7",
         "illuminate/events": "^5.7",
         "twig/twig": "^2.5",
-        "ext-json": "*"
+        "ext-json": "*",
+        "intervention/image": "^2.4"
     }
 }
