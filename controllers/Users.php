@@ -3,6 +3,7 @@ require_once "C:\OSPanel\domains\mvc\models\User.php";
 
 class Users extends User
 {
+
     public function store()
     {
         $name = $_POST['name'];
@@ -27,7 +28,7 @@ class Users extends User
         $view->render('userpage.html', [ 'user' => $_POST ]);
     }
 
-    public function create()
+    public function reg()
     {
         $view = new \View();
         $view->render('registration.html',$data=array());
@@ -37,9 +38,8 @@ class Users extends User
     {
         $login = $_POST['login'];
         $password = $_POST['password'];
-        $login = array($login);
         $user = User::findCurrentUser($login, $password);
-        print_r($user);
+        print_r(json_decode($user));
         if (!empty($user)) {
             $view = new \View();
             $view->render('userpage.html', json_decode($user));

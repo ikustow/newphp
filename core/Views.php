@@ -14,8 +14,6 @@ class View
     public function render($filename, $data)
     {
          extract($data);
-      //  require_once __DIR__."/../views/".$filename.".php";
-        // require_once  $filename;
-         echo  $this->twig->render($filename, $data);
+          echo  $this->twig->render($filename, $data);
     }
 }
