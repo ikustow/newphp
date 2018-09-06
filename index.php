@@ -11,7 +11,7 @@ require_once "controllers/Main.php";
 $routes = explode('/', $_SERVER['REQUEST_URI']);
 
 
-$controller_name = "Main";
+$controller_name = "Main"; //
 $action_name = 'index';
 echo $routes[count($routes)-2];
 if ($routes[count($routes)-2] == "Users") {
