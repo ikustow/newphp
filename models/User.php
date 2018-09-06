@@ -14,4 +14,9 @@ class User extends \Illuminate\Database\Eloquent\Model
     {
         return  User::newQuery()->Where("login", '=', $username)->Where('password', '=', $password)->get()->toArray();
     }
+
+    public function findUserbyID($id)
+    {
+        return  self::Query()->Where("id", '=', $id)->get()->toArray();
+    }
 }

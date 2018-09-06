@@ -1,7 +1,7 @@
 
 <h1>Добро пожаловать, {{user.name}}!</h1>
 <form  enctype="multipart/form-data"  action="Files/loadavatar" method="post">
-    <img src='/images/{{user.avatar}}' alt="{{user.avatar}}" style= "height: 250px; width: auto;"/>
+    <img src='/images/{{user.avatar}}' alt="{{user.avatar}}" style= "height: 100px; width: auto;"/>
     <br><br>
     <label>
         <input name="avatar" type="file"  accept="image/jpeg,image/png"/>
@@ -26,8 +26,20 @@
     <br><br>
     <input type="hidden" name="userid" value="{{user.id}}" />
     </form>
-<form action="Files/loadpicture" method="post">
+<form enctype="multipart/form-data" action="Files/loadpicture" method="post">
     </label>
+        <input name="picture" type="file"  accept="image/jpeg,image/png"/>
         <input type="submit" value="Загрузить картинку">
     </label>
+    <label>
+    <input type="hidden" name="userid" value="{{user.id}}" />
+    </label>
+    <p>Галерея:</p>
+    <ul>
+        {% for picture in pictures %}
+        <li> Название: {{ picture.file }}</li>
+        <img src='/images/{{picture.file}}' alt="{{picture.file}}" style= "height: 100px; width: auto;"/>
+        {% endfor %}
+    </ul>
+    <input type="hidden" name="referer" value="<?= $_SERVER['HTTP_REFERER'] ?>" />
 </form>
