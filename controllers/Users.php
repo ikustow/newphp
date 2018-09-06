@@ -1,5 +1,6 @@
 <?php
-namespace App;
+require_once "C:\OSPanel\domains\mvc\models\User.php";
+
 class Users extends User
 {
     public function store()
@@ -23,28 +24,28 @@ class Users extends User
         $user = json_decode($user);
         print_r($user);
         $view = new \View();
-        $view->render('C:\OSPanel\domains\mvc\views\users\userpage.php',$_POST);
+        $view->render('userpage.html', [ 'user' => $_POST ]);
     }
 
     public function create()
     {
         $view = new \View();
-        $view->render('C:\OSPanel\domains\mvc\views\users\registration.php');
+        $view->render('registration.html',$data=array());
     }
 
     public function finduser()
     {
         $login = $_POST['login'];
         $password = $_POST['password'];
-
-        $user = $this->finduser($login, $password);
+        $login = array($login);
+        $user = User::findCurrentUser($login, $password);
         print_r($user);
         if (!empty($user)) {
             $view = new \View();
-            $view->render('C:\OSPanel\domains\mvc\views\users\userpage.php', $user);
+            $view->render('userpage.html', json_decode($user));
         } else {
             $view = new \View();
-            $view->render('C:\OSPanel\domains\mvc\views\users\infopage.php');
+            $view->render('infopage.html',$data=array());
         }
     }
 }

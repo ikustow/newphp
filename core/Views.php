@@ -11,11 +11,11 @@ class View
         $this->twig = new Twig_Environment($this->loader, ['cache' => false,]);
     }
 
-    public function render($filename, $data = array())
+    public function render($filename, $data)
     {
          extract($data);
       //  require_once __DIR__."/../views/".$filename.".php";
-         require_once  $filename;
-       //  $this->twig->render($filename, $data);
+        // require_once  $filename;
+         echo  $this->twig->render($filename, $data);
     }
 }
