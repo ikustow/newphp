@@ -7,6 +7,6 @@ class User extends \Illuminate\Database\Eloquent\Model
 
     public  function findUser($username,$password)
     {
-        return User::where('name', '=', $username)->Where('password', '=', $password)->get();
+        return self::where('name', '=', $username)->Where('password', '=', $password)->get();
     }
 }

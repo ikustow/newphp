@@ -71,7 +71,7 @@ EOF;
 
     public function resourcesProvider()
     {
-        $directory = __DIR__ . '/../fixtures/extractor/';
+        $directory = __DIR__.'/../fixtures/extractor/';
         $splFiles = array();
         foreach (new \DirectoryIterator($directory) as $fileInfo) {
             if ($fileInfo->isDot()) {

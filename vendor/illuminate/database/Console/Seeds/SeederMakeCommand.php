@@ -55,9 +55,9 @@ class SeederMakeCommand extends GeneratorCommand
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
-        parent::fire();
+        parent::handle();
 
         $this->composer->dumpAutoloads();
     }
@@ -69,7 +69,7 @@ class SeederMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/stubs/seeder.stub';
+        return __DIR__.'/stubs/seeder.stub';
     }
 
     /**

@@ -32,7 +32,7 @@ class Twig_Tests_IntegrationTest extends Twig_Test_IntegrationTestCase
 
     public function getFixturesDir()
     {
-        return __DIR__ . '/Fixtures/';
+        return __DIR__.'/Fixtures/';
     }
 }
 
@@ -307,5 +307,23 @@ class CountableStub implements \Countable
     public function __toString()
     {
         throw new Exception('__toString shall not be called on \Countables');
+    }
+}
+
+/**
+ * This class is used in tests for the length filter.
+ */
+class IteratorAggregateStub implements \IteratorAggregate
+{
+    private $data;
+
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
+    public function getIterator()
+    {
+        return new ArrayIterator($this->data);
     }
 }
