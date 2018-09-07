@@ -18,10 +18,9 @@ class Admin
           $data = File::query()->newQuery()
               ->join('users', 'users.id', '=', 'files.userid')
               ->get(array('files.*', 'users.name'))->toArray();
-          print_r($data);
 
           $view = new \View();
-          $view->render('admin.html', ['data' => $data]);
+          $view->render('admin.html', ['info' => $data]);
       }
   }
 

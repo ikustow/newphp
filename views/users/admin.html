@@ -15,8 +15,8 @@
     </label>
     <p>Файлы:</p>
     <ul>
-        {% for info in data %}
-        <li> ID: {{info.user}} ; File {{info.file}}; Path: {{info.filepath}} ;</li>
+        {% for  item in info %}
+        <li>  {{item.name}};  {{item.file}}; {{item.filepath}} </li>>
         {% endfor %}
     </ul>
     </form>
@@ -29,6 +29,7 @@
 <form action="Admin/sortbyASC" method="post">
  <input type="submit" value="Сортировка по возрастанию">
 </form>
+<br>
 <form action="Admin/sortbyDesc" method="post">
     <input type="submit" value="Сортировка поубыванию">
     <p>Пользователи:</p>
