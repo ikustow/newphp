@@ -1,40 +1,35 @@
 <?php
-require_once  $_SERVER["DOCUMENT_ROOT"]."/models/File.php";
-require_once  $_SERVER["DOCUMENT_ROOT"]."/models/User.php";
-require_once 'databaseFunc.php';
 
-class Files extends File
+class Files
 {
 public function loadAvatar(){
-    $avatar = new File;
+    $avatar = new FileModel;
     $pictureData = $avatar->loadProfilePicture($_FILES);
-    loadInfoInUserDataBase($pictureData,$_POST);
+    loadInfoUserInDataBase($pictureData,$_POST);
 
-    $user = User::findUserbyID($_POST['userid']);
-    $pictures = File::findUserPictures($user[0]['id']);
+    $user = UserModel::findUserbyID($_POST['userid']);
+    $pictures = FileModel::findUserPictures($user[0]['id']);
 
     if (!empty($user[0])) {
         $view = new \View();
         $view->render('userpage.html', ['user' => $user[0], 'pictures' => $pictures]);
     } else {
         $view = new \View();
-        $view->render('infopage.html',$data=array());
+        $view->render('infopage.html', array());
     }
 }
     public function loadPicture(){
-        $picture = new File;
+        $picture = new FileModel;
         $pictureData = $picture->loadContentPicture($_FILES);
-        loadInfoInFilesDataBase($pictureData,$_POST);
-        $user = User::findUserbyID($_POST['userid']);
-        $pictures = File::findUserPictures($user[0]['id']);
-        openAdminPanel();
+        loadInfoFilesInDataBase($pictureData,$_POST);
+        $user = UserModel::findUserbyID($_POST['userid']);
         if (!empty($user[0])) {
             $view = new \View();
+            $pictures = FileModel::findUserPictures($user[0]['id']);
             $view->render('userpage.html', ['user' => $user[0], 'pictures' => $pictures]);
-
         } else {
             $view = new \View();
-            $view->render('infopage.html',$data=array());
+            $view->render('infopage.html', array());
         }
     }
 }

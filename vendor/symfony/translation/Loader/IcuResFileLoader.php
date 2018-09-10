@@ -33,7 +33,7 @@ class IcuResFileLoader implements LoaderInterface
         }
 
         if (!is_dir($resource)) {
-            throw new NotFoundResourceException(sprintf('File "%s" not found.', $resource));
+            throw new NotFoundResourceException(sprintf('FileModel "%s" not found.', $resource));
         }
 
         try {

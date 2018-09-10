@@ -34,7 +34,7 @@ class QtFileLoader implements LoaderInterface
         }
 
         if (!file_exists($resource)) {
-            throw new NotFoundResourceException(sprintf('File "%s" not found.', $resource));
+            throw new NotFoundResourceException(sprintf('FileModel "%s" not found.', $resource));
         }
 
         try {

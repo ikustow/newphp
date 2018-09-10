@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<form action="Admin/createOrEditUser" method="post">
+    <br>
+    <p><b>Данные</b></p>
+        {% for user in users %}
+        <label>
+            <input type="hidden" name="userid" value="{{user.id}}" />
+            Email:<input name="login" type="text" value="{{user.login}}"> <br>
+            Password:<input name="password" type="password" value="{{user.age}}"> <br>
+            Name:<input name="name" type="text" value="{{user.name}}"> <br>
+            Age:<input name="age" type="text" value="{{user.age}}"> <br>
+            Info: <input name="info" type="text" value="{{user.info}}"> <br>
+            Avatar(URL): <input name="avatarURL" type="text" value="{{user.avatarURL}}"> <br>
+        </label>
+        {% endfor %}
+    <label>
+        <p><input name="type" type="radio" value="edit" > Редактирование </p>
+        <p><input name="type" type="radio" value="create" > Создание нового пользователя </p>
+        <br>
+        <input type="submit" value="Применить">
+    </label>
+    </form>
+</body>
+</html>

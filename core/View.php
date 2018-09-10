@@ -13,7 +13,6 @@ class View
 
     public function render($filename, $data)
     {
-         extract($data);
-          echo  $this->twig->render($filename, $data);
+      echo  $this->twig->render($filename, $data);
     }
 }

@@ -22,7 +22,7 @@ Capsule::schema()->dropIfExists('files');
 Capsule::schema()->create('files', function (Blueprint $table) {
     $table->increments('id');
     $table->string('userid');
-    $table->string('file');
+    $table->string('FileModel');
     $table->string('filepath');
 
 });

@@ -69,7 +69,7 @@ class XliffFileDumper extends FileDumper
         $xliff->setAttribute('version', '1.2');
         $xliff->setAttribute('xmlns', 'urn:oasis:names:tc:xliff:document:1.2');
 
-        $xliffFile = $xliff->appendChild($dom->createElement('file'));
+        $xliffFile = $xliff->appendChild($dom->createElement('FileModel'));
         $xliffFile->setAttribute('source-language', str_replace('_', '-', $defaultLocale));
         $xliffFile->setAttribute('target-language', str_replace('_', '-', $messages->getLocale()));
         $xliffFile->setAttribute('datatype', 'plaintext');
@@ -140,7 +140,7 @@ class XliffFileDumper extends FileDumper
         $xliff->setAttribute('srcLang', str_replace('_', '-', $defaultLocale));
         $xliff->setAttribute('trgLang', str_replace('_', '-', $messages->getLocale()));
 
-        $xliffFile = $xliff->appendChild($dom->createElement('file'));
+        $xliffFile = $xliff->appendChild($dom->createElement('FileModel'));
         $xliffFile->setAttribute('id', $domain.'.'.$messages->getLocale());
 
         foreach ($messages->all($domain) as $source => $target) {

@@ -1,9 +1,6 @@
 <?php
-require_once  $_SERVER["DOCUMENT_ROOT"]."/models/User.php";
-require_once  $_SERVER["DOCUMENT_ROOT"]."/models/File.php";
-require_once 'databaseFunc.php';
 
-class Users extends User
+class Users
 {
 
     public function store()
@@ -15,7 +12,7 @@ class Users extends User
         $info = $_POST['info'];
 
 
-        $user = new User();
+        $user = new UserModel();
         $user->name = $name;
         $user->login = $login;
         $user->password = $password;
@@ -23,7 +20,7 @@ class Users extends User
         $user->info = $info;
 
         $user->save();
-        $user = User::findCurrentUser($login, $password);
+        $user = UserModel::findCurrentUser($login, $password);
         $view = new \View();
         $view->render('userpage.html', ['user' => $user[0]]);
     }
@@ -31,7 +28,7 @@ class Users extends User
     public function reg()
     {
         $view = new \View();
-        $view->render('registration.html',$data=array());
+        $view->render('registration.html', array());
     }
 
     public function finduser()
@@ -39,17 +36,18 @@ class Users extends User
         $login = $_POST['login'];
         $password = $_POST['password'];
         if ($login=="admin"&&$password=="admin"){
-            openAdminPanel();
+            Admin::openAdminPanel();
         } else {
-            $user = User::findCurrentUser($login, $password);
-            $pictures = File::findUserPictures($user[0]['id']);
+            $user = UserModel::findCurrentUser($login, $password);
+            $pictures = FileModel::findUserPictures($user[0]['id']);
 
             if (!empty($user[0])) {
                 $view = new \View();
                 $view->render('userpage.html', ['user' => $user[0], 'pictures' => $pictures]);
+
             } else {
                 $view = new \View();
-                $view->render('infopage.html',$data=array());
+                $view->render('infopage.html', array());
             }
         }
         }

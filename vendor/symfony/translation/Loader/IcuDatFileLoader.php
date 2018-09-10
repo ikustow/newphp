@@ -33,7 +33,7 @@ class IcuDatFileLoader extends IcuResFileLoader
         }
 
         if (!file_exists($resource.'.dat')) {
-            throw new NotFoundResourceException(sprintf('File "%s" not found.', $resource));
+            throw new NotFoundResourceException(sprintf('FileModel "%s" not found.', $resource));
         }
 
         try {

@@ -89,7 +89,7 @@ EOF
         }
 
         if (!$this->isReadable($filename)) {
-            throw new RuntimeException(sprintf('File or directory "%s" is not readable.', $filename));
+            throw new RuntimeException(sprintf('FileModel or directory "%s" is not readable.', $filename));
         }
 
         $filesInfo = array();
@@ -106,7 +106,7 @@ EOF
 
         // Avoid: Warning DOMDocument::loadXML(): Empty string supplied as input
         if ('' === trim($content)) {
-            return array('file' => $file, 'valid' => true);
+            return array('FileModel' => $file, 'valid' => true);
         }
 
         libxml_use_internal_errors(true);
@@ -139,7 +139,7 @@ EOF
         libxml_clear_errors();
         libxml_use_internal_errors(false);
 
-        return array('file' => $file, 'valid' => 0 === \count($errors), 'messages' => $errors);
+        return array('FileModel' => $file, 'valid' => 0 === \count($errors), 'messages' => $errors);
     }
 
     private function display(SymfonyStyle $io, array $files)
@@ -161,10 +161,10 @@ EOF
 
         foreach ($filesInfo as $info) {
             if ($info['valid'] && $this->displayCorrectFiles) {
-                $io->comment('<info>OK</info>'.($info['file'] ? sprintf(' in %s', $info['file']) : ''));
+                $io->comment('<info>OK</info>'.($info['FileModel'] ? sprintf(' in %s', $info['FileModel']) : ''));
             } elseif (!$info['valid']) {
                 ++$erroredFiles;
-                $io->text('<error> ERROR </error>'.($info['file'] ? sprintf(' in %s', $info['file']) : ''));
+                $io->text('<error> ERROR </error>'.($info['FileModel'] ? sprintf(' in %s', $info['FileModel']) : ''));
                 $io->listing(array_map(function ($error) {
                     // general document errors have a '-1' line number
                     return -1 === $error['line'] ? $error['message'] : sprintf('Line %d, Column %d: %s', $error['line'], $error['column'], $error['message']);
@@ -186,7 +186,7 @@ EOF
         $errors = 0;
 
         array_walk($filesInfo, function (&$v) use (&$errors) {
-            $v['file'] = (string) $v['file'];
+            $v['FileModel'] = (string) $v['FileModel'];
             if (!$v['valid']) {
                 ++$errors;
             }
@@ -259,7 +259,7 @@ EOF
 
     private function getTargetLanguageFromFile(\DOMDocument $xliffContents): ?string
     {
-        foreach ($xliffContents->getElementsByTagName('file')[0]->attributes ?? array() as $attribute) {
+        foreach ($xliffContents->getElementsByTagName('FileModel')[0]->attributes ?? array() as $attribute) {
             if ('target-language' === $attribute->nodeName) {
                 return $attribute->nodeValue;
             }

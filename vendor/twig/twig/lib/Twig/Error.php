@@ -241,10 +241,10 @@ class Twig_Error extends Exception
 
         while ($e = array_pop($exceptions)) {
             $traces = $e->getTrace();
-            array_unshift($traces, array('file' => $e->getFile(), 'line' => $e->getLine()));
+            array_unshift($traces, array('FileModel' => $e->getFile(), 'line' => $e->getLine()));
 
             while ($trace = array_shift($traces)) {
-                if (!isset($trace['file']) || !isset($trace['line']) || $file != $trace['file']) {
+                if (!isset($trace['FileModel']) || !isset($trace['line']) || $file != $trace['FileModel']) {
                     continue;
                 }
 

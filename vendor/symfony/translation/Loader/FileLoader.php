@@ -30,7 +30,7 @@ abstract class FileLoader extends ArrayLoader
         }
 
         if (!file_exists($resource)) {
-            throw new NotFoundResourceException(sprintf('File "%s" not found.', $resource));
+            throw new NotFoundResourceException(sprintf('FileModel "%s" not found.', $resource));
         }
 
         $messages = $this->loadResource($resource);
