@@ -58,47 +58,34 @@ class Admin
 
             $user = UserModel::query()->find( $_POST['userid']);
 
-            $name = $_POST['name'];
-            $login = $_POST['login'];
-            $password = $_POST['password'];
-            $age = $_POST['age'];
-            $info = $_POST['info'];
-            $avatarURL = $_POST['avatarURL'];
 
-            $user->name = $name;
-            $user->login = $login;
-            $user->password = $password;
-            $user->age = $age;
-            $user->info = $info;
-            $user->avatarURL = $avatarURL;
+            $user->name = $_POST['name'];
+            $user->login = $_POST['login'];
+            $user->password = $_POST['password'];
+            $user->age = $_POST['age'];
+            $user->info = $_POST['info'];
+            $user->avatarURL = $_POST['avatarURL'];
 
             $user->save();
 
             echo "Данные пользователя изменены!";
             self::openAdminPanel();
         } else {
-
             $checkUser = UserModel::query()->newQuery()->where("login", '=', $_POST['login'])->get()->toArray();
             if (!empty($checkUser)) {
                 echo 'Пользователь с данным Email уже зарегестрирован в системе';
                 $view = new \View();
                 $view->render('adminEditUsers.html',  ['users' => $checkUser]);
             } else{
-                $name = $_POST['name'];
-                $login = $_POST['login'];
-                $password = $_POST['password'];
-                $age = $_POST['age'];
-                $info = $_POST['info'];
-                $avatarURL = $_POST['$avatarURL'];
-
 
                 $user = new UserModel();
-                $user->name = $name;
-                $user->login = $login;
-                $user->password = $password;
-                $user->age = $age;
-                $user->info = $info;
-                $user->avatarURL = $avatarURL;
+
+                $user->name = $_POST['name'];
+                $user->login = $_POST['login'];
+                $user->password = $_POST['password'];
+                $user->age = $_POST['age'];
+                $user->info = $_POST['info'];
+                $user->avatarURL = $_POST['avatarURL'];
 
                 $user->save();
                 echo "Пользователь создан в БД";
