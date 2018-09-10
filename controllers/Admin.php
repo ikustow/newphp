@@ -44,7 +44,7 @@ class Admin
     {
         if (!empty($_POST['ID'])) {
             $users = UserModel::query()->newQuery()->where("id", '=', $_POST['ID'])->get()->toArray();
-            print_r($users);
+
             $view = new \View();
             $view->render('adminEditUsers.html',  ['users' => $users]);
         } else {
