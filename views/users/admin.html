@@ -5,7 +5,7 @@
     <title>AdminPanel</title>
 </head>
 <body>
-<form action="Admin/getUsers" method="post">
+<form action="Admin/getData" method="post">
     <h2>Admin Panel:</h2>
     <br>
     <p>Пользователи:</p>
@@ -30,19 +30,17 @@
         <p><b>Сортировка во возрасту пользователей</b></p>
         <p><input name="sort" type="radio" value="ASC"> По убыванию </p>
         <p><input name="sort" type="radio" value="Desc"> По возрастранию </p>
-        <input type="submit" value="Отсортировать">
+        <input type="submit" name="users" value="Отсортировать">
         <br> <br>
     </label>
-</form>
 <hr align="left" width="300" color="Red" />
-<form action="Admin/getFiles" method="post">
     <p>Загруженные пользователями файлы:</p>
     <label>
        Отбор по ID пользователя <input type="text" name="userid">
     </label>
     <br><br>
     <label>
-        <input type="submit" value="Показать список загруженных файлов">
+        <input type="submit" name="files" value="Показать список загруженных файлов">
     </label>
     <table width='50%' border='1'>
         <tr>
@@ -58,9 +56,9 @@
         </tr>
         {% endfor %}
     </table>
- </form>
 <hr align="left" width="300" color="Red" />
 <br>
+</form>
 <form action="Admin/editUsers" method="post">
     <p>Редактирование данных пользователей:</p>
     <p>Введите ID пользователя для редактирования или удаления</p>

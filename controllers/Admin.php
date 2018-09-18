@@ -2,30 +2,30 @@
 
 class Admin
 {
-    public function getFiles()
+    public function getData()
     {
-        $view = new \View();
-        if (!empty($_POST['userid'])) { //выводим по id
-            $files = FileModel::query()->newQuery()->where("userid", '=', $_POST['userid'])
-                ->join('users', 'users.id', '=', 'files.userid')
-                ->get(array('files.*', 'users.name'))->toArray();
-        } else {
-            $files = FileModel::query()->newQuery()
-                ->join('users', 'users.id', '=', 'files.userid')
-                ->get(array('files.*', 'users.name'))->toArray();
-        }
-        $view->render('admin.html', ['files' => $files]);
-    }
+        if (isset($_POST['files'])) {
+            $view = new \View();
+            if (!empty($_POST['userid'])) { //выводим по id
+                $files = FileModel::query()->newQuery()->where("userid", '=', $_POST['userid'])
+                    ->join('users', 'users.id', '=', 'files.userid')
+                    ->get(array('files.*', 'users.name'))->toArray();
+            } else {
+                $files = FileModel::query()->newQuery()
+                    ->join('users', 'users.id', '=', 'files.userid')
+                    ->get(array('files.*', 'users.name'))->toArray();
+            }
+            $users = UserModel::all()->toArray();
 
-    public function getUsers()
-    {
-        if ($_POST['sort'] == 'ASC') {
-            $users = UserModel::all()->sortBy('age')->toArray();
+            $view->render('admin.html', ['files' => $files,'users' => $users]);
+        }
+        if (isset($_POST['users'])) {
             $view = new \View();
-            $view->render('admin.html', ['users' => $users]);
-        } else {
-            $users = UserModel::all()->sortByDesc('age')->toArray();
-            $view = new \View();
+            if ($_POST['sort'] == 'ASC') {
+                $users = UserModel::all()->sortBy('age')->toArray();
+            } else {
+                $users = UserModel::all()->sortByDesc('age')->toArray();
+            }
             $view->render('admin.html', ['users' => $users]);
         }
     }
