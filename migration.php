@@ -29,7 +29,18 @@ require_once "config.php";
 Capsule::schema()->dropIfExists('goods');
 Capsule::schema()->create('goods', function (Blueprint $table) {
     $table->increments('id');
-    $table->string('good');
+    $table->string('name');
     $table->string('category');
+    $table->integer('price');
+    $table->string('image');//URL
+    $table->string('about');
+
+});
+Capsule::schema()->dropIfExists('category');
+Capsule::schema()->create('category', function (Blueprint $table) {
+    $table->increments('id');
+    $table->integer('goodsid');
+    $table->string('name');
+    $table->string('description');
 });
 
