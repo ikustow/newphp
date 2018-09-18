@@ -5,7 +5,7 @@
     <title>Edit</title>
 </head>
 <body>
-<form action="Admin/createOrEditUser" method="post">
+<form action="Admin/EditUser" method="post">
     <br>
     <p><b>Данные</b></p>
         {% for user in users %}
@@ -20,10 +20,8 @@
         </label>
         {% endfor %}
     <label>
-        <p><input name="type" type="radio" value="edit" > Редактирование </p>
-        <p><input name="type" type="radio" value="create" > Создание нового пользователя </p>
         <br>
-        <input type="submit" value="Применить">
+        <input type="submit" value="Применить изменения">
     </label>
     </form>
 </body>

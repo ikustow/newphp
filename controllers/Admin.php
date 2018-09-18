@@ -14,7 +14,7 @@ class Admin
                 ->join('users', 'users.id', '=', 'files.userid')
                 ->get(array('files.*', 'users.name'))->toArray();
         }
-        $view->render('admin.html', ['info' => $files]);
+        $view->render('admin.html', ['files' => $files]);
     }
 
     public function getUsers()
@@ -30,61 +30,46 @@ class Admin
         }
     }
 
-    public static function openAdminPanel($users)
+    public static function openAdminPanel()
     {
+        $users = UserModel::all()->toArray();
         $view = new \View();
         $view->render('admin.html', ['users' => $users]);
     }
 
     public static function editUsers()
     {
-        $view = new \View();
-        $usersdata = array();
+
         if (!empty($_POST['ID'])) {
-            $usersdata = UserModel::query()->newQuery()->where("id", '=', $_POST['ID'])->get()->toArray();
-        }
-        $view->render('adminEditUsers.html', $usersdata);
-    }
-    public static function createOrEditUser()
-    {
-        if ($_POST['type'] == 'edit') {
-
-            $user = UserModel::query()->find( $_POST['userid']);
-
-
-            $user->name = $_POST['name'];
-            $user->login = $_POST['login'];
-            $user->password = $_POST['password'];
-            $user->age = $_POST['age'];
-            $user->info = $_POST['info'];
-            $user->avatarURL = $_POST['avatarURL'];
-
-            $user->save();
-
-            echo "Данные пользователя изменены!";
-            self::openAdminPanel();
-        } else {
-            $checkUser = UserModel::query()->newQuery()->where("login", '=', $_POST['login'])->get()->toArray();
-            if (!empty($checkUser)) {
-                echo 'Пользователь с данным Email уже зарегестрирован в системе';
+            if (isset($_POST['change'])) {
+                $usersdata = UserModel::query()->newQuery()->where("id", '=', $_POST['ID'])->get()->toArray();
                 $view = new \View();
-                $view->render('adminEditUsers.html',  ['users' => $checkUser]);
-            } else{
-
-                $user = new UserModel();
-
-                $user->name = $_POST['name'];
-                $user->login = $_POST['login'];
-                $user->password = $_POST['password'];
-                $user->age = $_POST['age'];
-                $user->info = $_POST['info'];
-                $user->avatarURL = $_POST['avatarURL'];
-
-                $user->save();
-                echo "Пользователь создан в БД";
-                self::openAdminPanel();
+                $view->render('adminEditUsers.html', ['users' => $usersdata]);
             }
-
         }
+        if (isset($_POST['delete'])) {
+            UserModel::destroy($_POST['ID']);
+            echo "Пользователь удален";
+            self::openAdminPanel();
+        }
+        if (isset($_POST['create'])) {
+            $view = new \View();
+            $view->render('create.html', array());
+        }
+    }
+
+    public static function EditUser()
+    {
+
+        $user = UserModel::query()->find($_POST['userid']);
+        $user->name = $_POST['name'];
+        $user->login = $_POST['login'];
+        $user->password = $_POST['password'];
+        $user->age = $_POST['age'];
+        $user->info = $_POST['info'];
+        $user->avatarURL = $_POST['avatarURL'];
+        $user->save();
+        echo "Данные пользователя изменены!";
+        self::openAdminPanel();
     }
 }

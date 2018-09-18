@@ -5,24 +5,44 @@ class Users
 
     public function store()
     {
-        $name = $_POST['name'];
-        $login = $_POST['login'];
-        $password = $_POST['password'];
-        $age = $_POST['age'];
-        $info = $_POST['info'];
+        if (isset($_POST['reg'])) {
+            $name = $_POST['name'];
+            $login = $_POST['login'];
+            $password = $_POST['password'];
+            $age = $_POST['age'];
+            $info = $_POST['info'];
 
 
-        $user = new UserModel();
-        $user->name = $name;
-        $user->login = $login;
-        $user->password = $password;
-        $user->age = $age;
-        $user->info = $info;
+            $user = new UserModel();
+            $user->name = $name;
+            $user->login = $login;
+            $user->password = $password;
+            $user->age = $age;
+            $user->info = $info;
 
-        $user->save();
-        $user = UserModel::findCurrentUser($login, $password);
-        $view = new \View();
-        $view->render('userpage.html', ['user' => $user[0]]);
+            $user->save();
+            $user = UserModel::findCurrentUser($login, $password);
+            $view = new \View();
+            $view->render('userpage.html', ['user' => $user[0]]);
+        }
+        if (isset($_POST['create'])) {
+            $name = $_POST['name'];
+            $login = $_POST['login'];
+            $password = $_POST['password'];
+            $age = $_POST['age'];
+            $info = $_POST['info'];
+
+
+            $user = new UserModel();
+            $user->name = $name;
+            $user->login = $login;
+            $user->password = $password;
+            $user->age = $age;
+            $user->info = $info;
+
+            $user->save();
+            Admin::openAdminPanel();
+        }
     }
 
     public function reg()
@@ -36,8 +56,7 @@ class Users
         $login = $_POST['login'];
         $password = $_POST['password'];
         if ($login=="admin"&&$password=="admin"){
-            $users = UserModel::all()->toArray();
-            Admin::openAdminPanel($users);
+          Admin::openAdminPanel();
         } else {
             $user = UserModel::findCurrentUser($login, $password);
             $pictures = FileModel::findUserPictures($user[0]['id']);

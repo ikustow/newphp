@@ -50,11 +50,11 @@
             <td>File</td>
             <td>Filepath</td>
         </tr>
-        {% for user in users %}
+        {% for file in files %}
         <tr>
-            <td>{{user.name}}</td>
-            <td>{{user.file}}</td>
-            <td>{{user.filepath}}</td>
+            <td>{{file.name}}</td>
+            <td>{{file.file}}</td>
+            <td>{{file.filepath}}</td>
         </tr>
         {% endfor %}
     </table>
@@ -63,13 +63,21 @@
 <br>
 <form action="Admin/editUsers" method="post">
     <p>Редактирование данных пользователей:</p>
-    <p>Введите ID пользователя или оставьте поле пустым для интерактивного создания нового пользователя</p>
+    <p>Введите ID пользователя для редактирования или удаления</p>
     <label>
         <input type="text" name="ID">
     </label>
     <br><br>
     <label>
-        <input type="submit" value="Открыть панель редактирования пользователей">
+        <input type="submit" name="change" value="Открыть панель редактирования пользователя">
+    </label>
+    <br><br>
+    <label>
+        <input type="submit" name="delete" value="Удалить пользователя">
+    </label>
+    <br><br>
+    <label>
+        <input type="submit" name="create" value="Создать нового пользователя">
     </label>
 </form>
 </body>
