@@ -4,21 +4,17 @@ class Admin
 {
     public function getFiles()
     {
+        $view = new \View();
         if (!empty($_POST['userid'])) { //выводим по id
-            $data = FileModel::query()->newQuery()->where("userid", '=', $_POST['userid'])
+            $files = FileModel::query()->newQuery()->where("userid", '=', $_POST['userid'])
                 ->join('users', 'users.id', '=', 'files.userid')
                 ->get(array('files.*', 'users.name'))->toArray();
-            $view = new \View();
-            $view->render('admin.html', ['info' => $data]);
-
         } else {
-            $data = FileModel::query()->newQuery()
+            $files = FileModel::query()->newQuery()
                 ->join('users', 'users.id', '=', 'files.userid')
                 ->get(array('files.*', 'users.name'))->toArray();
-
-            $view = new \View();
-            $view->render('admin.html', ['info' => $data]);
         }
+        $view->render('admin.html', ['info' => $files]);
     }
 
     public function getUsers()
@@ -42,15 +38,12 @@ class Admin
 
     public static function editUsers()
     {
+        $view = new \View();
+        $usersdata = array();
         if (!empty($_POST['ID'])) {
-            $users = UserModel::query()->newQuery()->where("id", '=', $_POST['ID'])->get()->toArray();
-
-            $view = new \View();
-            $view->render('adminEditUsers.html',  ['users' => $users]);
-        } else {
-            $view = new \View();
-            $view->render('adminEditUsers.html', array());
+            $usersdata = UserModel::query()->newQuery()->where("id", '=', $_POST['ID'])->get()->toArray();
         }
+        $view->render('adminEditUsers.html', $usersdata);
     }
     public static function createOrEditUser()
     {
