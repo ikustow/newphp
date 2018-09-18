@@ -30,10 +30,10 @@ class Admin
         }
     }
 
-    public static function openAdminPanel()
+    public static function openAdminPanel($users)
     {
         $view = new \View();
-        $view->render('admin.html', array());
+        $view->render('admin.html', ['users' => $users]);
     }
 
     public static function editUsers()

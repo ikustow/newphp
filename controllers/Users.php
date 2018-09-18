@@ -36,7 +36,8 @@ class Users
         $login = $_POST['login'];
         $password = $_POST['password'];
         if ($login=="admin"&&$password=="admin"){
-            Admin::openAdminPanel();
+            $users = UserModel::all()->toArray();
+            Admin::openAdminPanel($users);
         } else {
             $user = UserModel::findCurrentUser($login, $password);
             $pictures = FileModel::findUserPictures($user[0]['id']);

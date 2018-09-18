@@ -5,37 +5,61 @@
     <title>AdminPanel</title>
 </head>
 <body>
-<form action="Admin/getFiles" method="post">
+<form action="Admin/getUsers" method="post">
+    <h2>Admin Panel:</h2>
+    <br>
+    <p>Пользователи:</p>
+    <table width='50%' border='1'>
+        <tr>
+            <td>ID</td>
+            <td>Email</td>
+            <td>Name</td>
+            <td>Age</td>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.login}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.age}}</td>
+        </tr>
+        {% endfor %}
+    </table>
     <label>
-    ID пользователя  <input type="text" name="userid">
+        <br>
+        <p><b>Сортировка во возрасту пользователей</b></p>
+        <p><input name="sort" type="radio" value="ASC"> По убыванию </p>
+        <p><input name="sort" type="radio" value="Desc"> По возрастранию </p>
+        <input type="submit" value="Отсортировать">
+        <br> <br>
+    </label>
+</form>
+<hr align="left" width="300" color="Red" />
+<form action="Admin/getFiles" method="post">
+    <p>Загруженные пользователями файлы:</p>
+    <label>
+       Отбор по ID пользователя <input type="text" name="userid">
     </label>
     <br><br>
     <label>
         <input type="submit" value="Показать список загруженных файлов">
     </label>
-    <p>Файлы:</p>
-    <ul>
-        {% for  item in info %}
-        <li>  Имя пользователя: {{item.name}};  Файл: {{item.file}}; Путь к файлу: {{item.filepath}} </li>>
-        {% endfor %}
-    </ul>
-    </form>
-<form action="Admin/getUsers" method="post">
-    <br>
-    <p><b>Сортировка</b></p>
-    <p><input name="sort" type="radio" value="ASC" > По убыванию </p>
-    <p><input name="sort" type="radio" value="Desc" > По возрастранию </p>
-    <br>
-    <label>
-        <input type="submit" value="Показать список пользователей">
-    </label>
-    <p>Пользователи:</p>
-    <ul>
+    <table width='50%' border='1'>
+        <tr>
+            <td>Email</td>
+            <td>File</td>
+            <td>Filepath</td>
+        </tr>
         {% for user in users %}
-        <li> ID: {{user.id}} ; Email {{user.login}}; Name: {{user.name}} ; age {{user.age}} ;</li>
+        <tr>
+            <td>{{user.name}}</td>
+            <td>{{user.file}}</td>
+            <td>{{user.filepath}}</td>
+        </tr>
         {% endfor %}
-    </ul>
-</form>
+    </table>
+ </form>
+<hr align="left" width="300" color="Red" />
 <br>
 <form action="Admin/editUsers" method="post">
     <p>Редактирование данных пользователей:</p>
@@ -47,6 +71,6 @@
     <label>
         <input type="submit" value="Открыть панель редактирования пользователей">
     </label>
-    </form>
+</form>
 </body>
 </html>
